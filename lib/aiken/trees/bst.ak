@@ -22,7 +22,7 @@ pub fn leaf(data: data) -> Tree<data> {
 
 pub fn insert(
   tree: Tree<data>,
-  new_data: data,
+  data new_data: data,
   cmp: fn(data, data) -> Ordering,
 ) -> Tree<data> {
   when tree is {
@@ -50,10 +50,42 @@ test insert_1() {
   let fixture = Node { data: 4, left: leaf(2), right: leaf(7) }
 
   let result =
-    empty()
+    Empty
     |> insert(4, compare_int)
     |> insert(7, compare_int)
     |> insert(2, compare_int)
 
   result == fixture
+}
+
+pub fn find(
+  in tree: Tree<data>,
+  item: data,
+  cmp: fn(data, data) -> Ordering,
+) -> Option<data> {
+  when tree is {
+    Empty -> None
+    Node { data, left, right } ->
+      when cmp(item, data) is {
+        Less -> find(left, item, cmp)
+        Greater -> find(right, item, cmp)
+        Equal -> Some(data)
+      }
+  }
+}
+
+test find_1() {
+  let tree = Node { data: 4, left: leaf(2), right: leaf(7) }
+
+  let found = find(tree, 7, compare_int)
+
+  found == Some(7)
+}
+
+test find_2() {
+  let tree = Node { data: 4, left: leaf(2), right: leaf(7) }
+
+  let not_found = find(tree, 10, compare_int)
+
+  not_found == None
 }
