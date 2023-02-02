@@ -1,0 +1,8 @@
+{
+  "preamble": {
+    "title": "aiken-lang/trees",
+    "description": "We got trees!",
+    "version": "0.0.1"
+  },
+  "validators": []
+}
