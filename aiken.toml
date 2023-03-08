@@ -1,6 +1,14 @@
 name = "aiken-lang/trees"
-version = "0.0.0"
+version = "0.1.0"
 licences = ["Apache-2.0"]
 description = "We got trees!"
 
-dependencies = []
+[repository]
+user = "aiken-lang"
+project = "trees"
+platform = "github"
+
+[[dependencies]]
+name = "aiken-lang/stdlib"
+version = "main"
+source = "github"
